@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 int main()
 {
 
@@ -20,7 +20,7 @@ int main()
     std::cout << "sizeof(p_number1) :" << sizeof(p_number1) << std::endl;
     std::cout << "sizeof(p_fractional_number1) :" << sizeof(p_fractional_number1) << std::endl;
 
-    //* It doesn't matter if you put the  * close to data or variable name 
+    //* It doesn't matter if you put the  * close to data or variable name
     int* p_number2 {nullptr};
     int *p_number3 {nullptr};
     int  *p_number4 {nullptr};
@@ -28,13 +28,13 @@ int main()
 
     int* p_number5 {}, other_int_var {};
     int* p_number6 {}, other_int_var6 {}; //* Confusing  as you wonder if other_int_var6
-                                          // *  is also   a pointer to int.It is not 
+                                          // *  is also   a pointer to int.It is not
                                           // * The structure is exactly the same for the
                                           // * previous statement
     std::cout << "sizeof(p_number5) : " << sizeof(p_number5) << std::endl;
     std::cout << "sizeof(other_int_var) : "<< sizeof(other_int_var) << std::endl;
     std::cout << "sizeof(p_number6) : " << sizeof(p_number6) << std::endl;
-    std::cout << "sizeof(other_int_var6) : " << sizeof(other_int_var6) << std::endl;  
+    std::cout << "sizeof(other_int_var6) : " << sizeof(other_int_var6) << std::endl;
 
     // * This is better to seperate these declorations on different lines though
     int* p_number7 {};
@@ -48,12 +48,12 @@ int main()
     int* p_int {&int_var}; //* The address of opreator (&)
 
     std::cout << "Int var : " << int_var << std::endl;
-    std::cout << "p_int (Address in memory) : " << p_int << std::endl;  
+    std::cout << "p_int (Address in memory) : " << p_int << std::endl;
 
-    // * You can also change the address stored in a pointer any time 
-    
+    // * You can also change the address stored in a pointer any time
+
     int int_var1 {65};
-    p_int = &int_var1; // * Assign a different address to the pointer 
+    p_int = &int_var1; // * Assign a different address to the pointer
     std::cout << "p_int (with different address) : " << p_int << std::endl;
 
     //! Can't cross assign between pointers of different types
@@ -67,25 +67,344 @@ int main()
 
     int* p_int2 {nullptr};
     int int_data {56};
-    p_int2 = &int_data; 
+    p_int2 = &int_data;
 
-    std::cout << "value : " << *p_int2 <<std::endl; 
+    std::cout << "value : " << *p_int2 <<std::endl;
     */
-    //* Pointer to char 
+    //* Pointer to char
     /*
     const char* message {"Hello world"};
 
     std::cout << "Messagge : " << message << std::endl;
-    
+
     //! *meesage = "B" // Compile Error
     std::cout << "*message : " << *message << std::endl;
 
-    // * Allow users to modify the string 
+    // * Allow users to modify the string
     char message1[] {"Hello world"};
     message1[0] = 'B';
     std::cout << "message1 : " << message1 << std::endl;
     */
 
-   
+    // * Dynamic memory allocation in Heap
+
+    //* How we've used pointers so far
+    /*
+    int number {22}; // Stack memory
+
+    int * p_number = &number;
+
+    std::cout << std::endl;
+    std::cout<<"Declaring pointer and assiging address : " << std::endl;
+    std::cout << "number : " << number << std::endl;
+    std::cout << "p_number : " << p_number << std::endl;
+    std::cout << "&number : " <<  &number << std::endl;
+    std::cout << "*p_number : " << *p_number << std::endl;
+
+    int * p_number1; //! Unitialized pointer , contains junk address
+    int number1 {12};
+    p_number1 = &number1; //* Make it point to a valid address
+    std::cout << std::endl;
+    std::cout << "Unitialized pointer : " << std::endl;
+    std::cout << "*p_number1 : " << *p_number1 << std::endl;
+    */
+    /*
+    //! BAD
+    //* Writing into unitialized pointer through dereference
+    int *p_number2;//! Contains junk addresses : could be anything
+    std::cout << "Writing in the 55" << std::endl;
+    *p_number2 = 55; //! Writing into junk address : BAD
+    std::cout << std::endl;
+    std::cout << "Writing into unitialized pointer through dereference" << std::endl;
+    std::cout << "p_number2 : " << p_number2 << std::endl;
+    std::cout << "*p_number2 : " << *p_number2 << std::endl;
+
+
+    //* Initializing pointer to null
+    //* int *p_number3{nullptr}; // Also works
+    int * p_number3 {}; //* Initialized with pointer equivalent of zero :  nullptr
+                         //* A pointer pointing nowhere
+     std::cout << "Writing into nullptr memory" << std::endl;
+     // ! *p_number3 = 33;//* Writing into pointer pointing nowhere : BAD , Crash
+     std::cout << "Done Writing"<< std::endl;
+
+     std::cout << std::endl;
+     std::cout << "Reading and Writing through nullptr : " << std::endl;
+     */
+
+    //* Dynamic heap memory
+    /*
+     int *p_number4 {nullptr};
+     p_number4 = new int;  //* Dynamic allocate space for a single int on the heap
+                           //* This memory belongs to our program from now on. The system
+                           //* can't use it for anything else until we return it
+                           //* After this line executes , we will have a valid memory location
+                           // * allocated . The size of the allocated memory will be such that it
+                           //* can store the type ponted to bye pointer
+     */
+    /*
+    *p_number4 = 77;
+    std::cout << std::endl;
+    std::cout << "Dynamic allocated memory "<< std::endl;
+    std::cout << "*p_number4 : " << *p_number4 << std::endl;
+*/
+    //* How we've used pointers so far
+    /*
+    int number {22}; //Stack memory
+    int *p_number = &number;
+
+    std::cout << std::endl;
+    std::cout << "Declaring pointers and assigning address : " << std::endl;
+    std::cout << "number : " << number << std::endl;
+    std::cout << "p_number : " << p_number << std::endl;
+    std::cout << "&p_number : " << &p_number <<std::endl;
+    std::cout << "*p_number : " << *p_number <<std::endl;
+
+    std::cout << std::endl; //! Uninitialized pointer, contain junk address
+    int *p_number1;
+    int number1 {12};
+    p_number1 = &number1;
+    std::cout << std::endl;
+    std::cout << "Uninitialized pointer : " << std::endl;
+    std::cout << "*p_number1 : " << *p_number1 << std::endl;
+    */
+
+    //! BAD
+    // ! Writing into uninitialized pointer through dereference
+    /*
+    int *p_number2; //! Contains junk address : could be anything
+     std::cout << "Writing in the 55" << std::endl;
+    *p_number2 = 55;
+    std::cout << std::endl;
+    std::cout << "Writing into uninitialized pointer through derefence" << std::endl;
+    std::cout << "p_number2 : " << p_number2 << std::endl; //* Reading from junk address
+    std::cout << "*p_number2 : " << *p_number2 << std::endl;
+     */
+
+    //* Initializing pointer to null
+    /*
+    //* int *p_number3 {nullptr}; // Also Works
+    int *p_number3{}; //* Initialized with pointer equavilent of zero : nullptr
+                      //* A pointer pointing nowhere '
+    std::cout << "Writing into nullptr memory" << std::endl;
+    *p_number3 = 33; //! Writing into a pointer pointing nowhere : BAD, CRASH
+    std::cout <<"Done Writing" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Reading and writing through nullptr : " << std::endl;
+    // * std::cout << "*p_number3" << p_number3 << std::endl;
+    // * std::cout << "*p_number3 << *p_number3 << std::endl;
+    */
+    //* Dynamic heap memory
+    /*
+    int *p_number4{nullptr};
+     p_number4 = new int; // * Dynamiclly allocate space for a single int on the heap
+                          //* This memory belongs to our program from now on.The system
+                          //* can't  use it for anyting else, untill we return it.
+                          //* After this line executes, we will have a valid memory location
+                          //* allocated. The size of the allocated memory will be such that it
+                          //* can store the type pointed to by the pointer
+     *p_number4 = 77;
+    std::cout << std::endl;
+    std::cout << "Dynamically allocating memory : " << std::endl;
+     std::cout <<"*p_number4 : " << *p_number4 << std::endl;
+
+     //* Return memory to the Operating system
+    delete p_number4;
+    p_number4 = nullptr;
+     */
+
+    //* It is also possible to initialize the pointer with a valid
+    //* address up on decloration. Not with a nullptr
+    /*
+    int *p_number5{new int};     //! Memory location contains junk value
+    int *p_number6{new int(22)}; //* Use direct initialization
+    int *p_number7{new int{23}}; //* Use uniform initialization
+
+    std::cout << std::endl;
+    std::cout << "Initialize with valid memory address at declaration " << std::endl;
+    std::cout << "p_number5 : " << p_number5 << std::endl;
+    std::cout << "*p_number5 : " << *p_number5 << std::endl;
+    std::cout << std::endl;
+    std::cout << "p_number6 : " << p_number6 << std::endl;
+    std::cout << "*p_number6 : " << *p_number6 << std::endl;
+    std::cout << std::endl;
+    std::cout << "p_number7 : " << p_number7 << std::endl;
+    std::cout << "*p_number7 : " << *p_number7 << std::endl;
+
+    //* Remember to release the memory
+    delete p_number5;
+    p_number5 = nullptr;
+
+    delete p_number6;
+    p_number6 = nullptr;
+
+    delete p_number7;
+    p_number7 = nullptr;
+
+    //* Can reuse pointers
+    p_number5 = new int(81);
+    std::cout << "*p_number5 : " << *p_number5 << std::endl;
+
+    delete p_number5;
+    p_number5 = nullptr;
+
+
+    //! Calling delete twice on a pointer : BAD!
+    p_number5 = new int (99);
+    std::cout << "*p_number5 : " << *p_number5 << std::endl;
+    delete p_number5;
+    delete p_number5;
+    std::cout << "Program ending well" << std::endl;
+    */
+
+    //! Case 1 : Uninitialized pointer
+    /*
+    int *p_number; //! Dangling uninitialized pointer
+
+    std::cout << std::endl;
+    std::cout << "Case1 : Uninialized pointer : ." << std::endl;
+    std::cout << "p_number : " << p_number << std::endl;
+    std::cout << "*p_number : " << *p_number << std::endl; //! Crash
+    */
+
+    //! Case2 : Deleted pointer
+    /*
+    std::cout <<std::endl;
+    std::cout << "Deleted pointer" << std::endl;
+    int * p_number1 {new int{67}};
+
+    std::cout << "*p_number1(before delete) : " << *p_number1 <<std::endl;
+
+    delete p_number1;
+
+    std::cout << "*p_number1(after delete) : " << *p_number1 << std::endl;
+    */
+
+    //! Case 3 : Multiple pointers pointing ta same address
+    /*
+    std::cout << std::endl;
+    std::cout << "Case 3:  Multiple pointers pointing to same address : " << std::endl;
+    int * p_number3 {new int{83}};
+    int * p_number4 {p_number3};
+
+    std::cout << "p_number3 - " << p_number3 << " - " << *p_number3 << std::endl;
+    std::cout << "p_number4 - " << p_number4 << " - " << *p_number4 << std::endl;
+
+    //* Deleting pointer
+    delete p_number3;
+
+    //! p_number4 points deleted memory. Dereferning it will lead to
+    //! undefined behavior :  Crash/ garbage or whatever
+     std::cout << "p_number4(after deleting p_number3): " << p_number4 << " - " << *p_number4 << std::endl;
+     */
+
+    //* Solution1 : Initialize your pointers immediately upon declaration
+    /*
+    std::cout << std::endl;
+    std::cout << "Solution1 : " << std::endl;
+    int *p_number5{nullptr};
+    int *p_number6{new int{57}};
+
+    //* Check for nullptr before use
+    if (p_number6 != nullptr)
+    {
+        std::cout << "*p_number6 : " << *p_number6 << std::endl;
+    }
+    else
+    {
+        std::cout << "Invalid address" << std::endl;
+    }
+
+    std::cout << "Program ending well" << std::endl;
+*/
+    //* Soution 2 :
+    //* Right after you call delete on pointer , remember to reset
+    //* the pointer to nullptr to make it Clear it doesn't point anywere
+    /*
+    std::cout << std::endl;
+    std::cout << "Solution2 : " << std::endl;
+    int *p_number7{new int{73}};
+
+    //* Use the pointer however you want
+    std::cout << "*p_number7 : " << p_number7 << " - " << *p_number7 << std::endl;
+
+    delete p_number7;
+    p_number7 = nullptr;
+
+    //* Check the nullptr before use
+    if(p_number7!= nullptr) {
+        std::cout << "*p_nubmer7 : " << *p_number7 << std::endl;
+    }else {
+        std::cout << "Invalid address" <<std::endl;
+    }
+    */
+
+    //* Solution 3
+    //* For multiple pointers pointing to the same  address, Make sure there is
+    //* one clear pointer (master pointer) that owns the memory (responsible for releasing when
+    //* neccesary) , other pointers should only be able to dereference when the master pointer valid
+    /*
+    std::cout << std::endl;
+    std::cout << "Solution 3 :" << std::endl;
+
+    int * p_nubmer8 {new int {344}}; //* Let's say p_number8 is the master pointer
+    int * p_number9 {p_nubmer8};
+
+    //* Dereference the pointers and use them
+    std::cout << "p_number8 - "<< p_nubmer8 << " - " << *p_nubmer8 << std::endl;
+
+    if(!(p_nubmer8 == nullptr)) { //* Only use slave pointers when master pointer is valid
+        std::cout << "p_number9 - " << p_number9 << " - " <<  *p_number9 << std::endl;
+    }
+
+    delete p_nubmer8;
+    p_nubmer8 = nullptr;
+
+
+    if(!(p_nubmer8 == nullptr)) { //* Only use slave pointers when master pointer is valid
+        std::cout << "p_number9 - " << p_number9 << " - " <<  *p_number9 << std::endl;
+    }else {
+        std::cerr << "WARNING : Trying to use an invalid pointer" << std::endl;
+    }
+    */
+
+    //! When 'new ' fails
+    //*int  * data = new int[10000000000000000];
+    /*
+    for(size_t i{0}; i < 1000000 ; ++i) {
+        int * data = new int [10000000000000000];
+    }
+    */
+
+    //* exception
+    /*
+    for (size_t i{0}; i < 1000000; ++i)
+    {
+        try
+        {
+            int *data = new int[10000000000000000];
+        }
+        catch (std::exception &ex)
+        {
+            std::cout << "Something went wrong : " << ex.what() << std::endl;
+        }
+    }
+    */
+    //* std::nothrow
+    for (size_t i{0}; i < 100; i++)
+    {
+
+        int *data = new (std::nothrow) int[10000000000000000];
+
+        if (data != nullptr)
+        {
+            std::cout << "Data allocated : " << std::endl;
+        }
+        else
+        {
+            std::cout << "Data allocation falied" << std::endl;
+        }
+    }
+    std::cout << "Program ending well" << std::endl;
     return 0;
 }
